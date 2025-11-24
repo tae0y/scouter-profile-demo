@@ -56,21 +56,21 @@
     > DB 계정정보: `profileuser` / `profilepass`
 
     ```sql
-    # 트랜잭션내 DB,APP 구간별 소요시간
+    -- 트랜잭션내 DB,APP 구간별 소요시간
     SELECT txid, step_type_name, sum(elapsed)
 	FROM public.profiles
     GROUP BY txid, step_type_name
     ORDER BY txid, step_type_name
     ```
     ```sql
-    # DB단 쿼리별 소요시간
+    -- DB단 쿼리별 소요시간
     SELECT txid, elapsed, main_value, param
     FROM public.profiles
     WHERE step_type_name = 'SQL3'
     ORDER BY elapsed DESC
     ```
     ```sql
-    # APP단 메서드별 소요시간
+    -- APP단 메서드별 소요시간
     SELECT txid, elapsed, REPLACE(REPLACE(main_value, CHR(10), ''), CHR(13), ''), param
     FROM public.profiles
     WHERE step_type_name = 'METHOD'
