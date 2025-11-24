@@ -49,11 +49,12 @@
     ```
 
 1. dbadmin에 접속해서 데이터를 조회하고 활용합시다!
-    > - Admin 접속주소: `http://localhost:8080`
-    > - Admin 계정정보: `admin@local.com` / `adminpass`
-    > - DB 접속주소: `db`
-    > - DB명: `profilesdb`
-    > - DB 계정정보: `profileuser` / `profilepass`
+    > Admin 접속주소: `http://localhost:8080`\
+    > Admin 계정정보: `admin@local.com` / `adminpass`\
+    > DB 접속주소: `db`\
+    > DB명: `profilesdb`\
+    > DB 계정정보: `profileuser` / `profilepass`
+
     ```sql
     # DB 쿼리
     SELECT txid, elapsed, main_value, param
@@ -63,9 +64,15 @@
     ```
     ```sql
     # 메서드
-    SELECT txid, elapsed, main_value, param
+    SELECT txid, elapsed, REPLACE(REPLACE(main_value, CHR(10), ''), CHR(13), ''), param
     FROM public.profiles
     WHERE step_type_name = 'METHOD'
     ORDER BY elapsed DESC
     ```
-    > Scouter를 활용한 메서드 프로파일링 방법은 다음 문서를 참고하세요 👉 [Method Profiling](https://github.com/scouter-project/scouter/blob/master/scouter.document/use-case/Method-Profiling.md
+    > Scouter를 활용한 메서드 프로파일링 방법은 다음 문서를 참고하세요 👉 [Method Profiling](https://github.com/scouter-project/scouter/blob/master/scouter.document/use-case/Method-Profiling.md)
+
+    각 데이터 필드는 다음과 같습니다.
+    - txid : 트랜잭션 ID
+    - elapsed : 밀리초 단위 소요시간
+    - main_value : SQL 쿼리 문자열 혹은 Java 메서드명
+    - param : SQL 쿼리의 파라미터
