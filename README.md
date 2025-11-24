@@ -68,3 +68,4 @@
     WHERE step_type_name = 'METHOD'
     ORDER BY elapsed DESC
     ```
+    > Scouter를 활용한 메서드 프로파일링 방법은 다음 문서를 참고하세요 👉 [Method Profiling](https://github.com/scouter-project/scouter/blob/master/scouter.document/use-case/Method-Profiling.md
