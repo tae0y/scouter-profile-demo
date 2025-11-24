@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
+    container_name: postgres
+    environment:
+      POSTGRES_DB: profilesdb
+      POSTGRES_USER: profileuser
+      POSTGRES_PASSWORD: profilepass
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+      - ./init.d:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+  dbadmin:
+    build:
+      context: .
+      dockerfile: Dockerfile.pgadmin
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@local.com
+      PGADMIN_DEFAULT_PASSWORD: adminpass
+    volumes:
+      - ./volumes/pgadmin:/var/lib/pgadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
